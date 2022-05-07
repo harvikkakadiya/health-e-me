@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-dark"
+			style="background-color: #324766">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/lab-appointments}"><img
+					th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/lab-appointments}">VIEW APPOINTMENTS</a></li>
+						<li class="nav-item"><a class="nav-link focus"
+							th:href="@{/lab-create-reports}">CREATE REPORTS</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/lab-profile}">MY PROFILE</a></li>
+						<li class="nav-item">
+							<p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+						</li>
+						<li class="nav-item">
+							<form th:action="@{/logout}" method="post">
+								<input type="submit" value="LOGOUT" />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section class="container-fluid"
+		style="margin-top: 150px; margin-bottom: 150px">
+		<div class="alert alert-success" role="alert" th:if="${success}">
+			<p th:text="${success}" />
+		</div>
+		<div class="alert alert-danger" role="alert" th:if="${error}">
+			<p th:text="${error}" />
+		</div>
+		<form th:action="@{/lab-create-reports}" method="POST">
+			<div class="form-group">
+				<label for="inputEmail">Patient's Email *</label> <input
+					type="email" class="form-control" id="inputEmail"
+					th:name="patientEmail" th:field="${lab.patientEmail}"
+					placeholder="Patient's Email">
+			</div>
+			<div class="form-group">
+				<label for="inputDate">Date *</label> <input type="text"
+					class="form-control" id="inputDate" th:name="reportDate"
+					th:field="${lab.reportDate}" placeholder="YYYY-MM-DD">
+			</div>
+			<div class="form-group">
+				<label for="inputTime">Time *</label> <input type="text"
+					class="form-control" id="inputTime" th:name="reportTime"
+					th:field="${lab.reportTime}" placeholder="HH:MM">
+			</div>
+			<div class="form-group">
+				<label for="inputPrescribedBy">Prescribed By *</label> <input
+					type="text" class="form-control" id="inputPrescribedBy"
+					th:name="prescribedBy" th:field="${lab.prescribedBy}"
+					placeholder="Doctor's Email">
+			</div>
+			<div class="form-group">
+				<label for="inputTestsDone">Tests Done *</label> <input type="text"
+					class="form-control" id="inputTestsDone" th:name="testsDone"
+					th:field="${lab.testsDone}"
+					placeholder="Names of the tests performed">
+			</div>
+			<div class="form-group">
+				<label for="inputTestResult">Result *</label> <input type="text"
+					class="form-control" id="inputTestResult" th:name="result"
+					th:field="${lab.result}" placeholder="Results of all the tests">
+			</div>
+			<button type="submit" class="btn btn-primary" style="background-color: #324766; margin: 10px;">Submit</button>
+		</form>
+	</section>
+	<footer class="row row-cols-5 py-5 my-5 border-top"
+		style="background-color: #324766; color: white">
+		<div class="col">
+			<a class="navbar-brand" href="#"><img
+				th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+		</div>
+
+		<div class="col">
+			<h5>FOR PATIENTS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>FOR DOCTORS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">MY PROFILE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>MORE</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">HELP</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FAQs</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">ABOUT</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>SOCIAL</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">TWITTER</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FACEBOOK</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">YOUTUBE</a></li>
+			</ul>
+		</div>
+	</footer>
+
+</body>
+</html>

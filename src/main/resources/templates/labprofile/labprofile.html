@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-dark"
+			style="background-color: #324766">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/lab-appointments}"><img
+					th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/lab-appointments}">VIEW APPOINTMENTS</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/lab-create-reports}">CREATE REPORTS</a></li>
+						<li class="nav-item"><a class="nav-link focus"
+							th:href="@{/lab-profile}">LAB PROFILE</a></li>
+						<li class="nav-item">
+							<p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+						</li>
+						<li class="nav-item">
+							<form th:action="@{/logout}" method="post">
+								<input type="submit" value="LOGOUT" />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section class="container-fluid"
+		style="margin-top: 150px; margin-bottom: 150px">
+		<div class="alert alert-success" role="alert" th:if="${success}">
+			<p th:text="${success}" />
+		</div>
+		<div class="alert alert-danger" role="alert" th:if="${error}">
+			<p th:text="${error}" />
+		</div>
+		<form th:object="${lab}" th:action="@{/lab-profile}" method="post">
+			<div class="form-group col-md-4">
+				<label for="labAccountBalance">Account Balance</label> <input
+					type="text" class="form-control" id="labAccountBalance"
+					th:field="${lab.labAccountBalance}" placeholder="100 CAD"
+					readOnly>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputLabName">Lab Name</label> <input type="text"
+						class="form-control" id="inputLabName" th:name="labName"
+						th:field="${lab.labName}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputDOE">Date of Establishment</label> <input
+					type="text" class="form-control" id="inputDOE" th:name="labDoe"
+					th:field="${lab.labDoe}">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputFirstName">Owner's Name</label> <input type="text"
+						class="form-control" id="inputFirstName"
+						th:name="labOwnerFirstName" th:field="${lab.labOwnerFirstName}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputFirstName"></label> <input type="text"
+						class="form-control" id="inputMiddleName"
+						th:name="labOwnerMiddleName" th:field="${lab.labOwnerMiddleName}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputFirstName"></label> <input type="text"
+						class="form-control" id="inputLastName" th:name="labOwnerLastName"
+						th:field="${lab.labOwnerLastName}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPhone">Phone</label> <input type="text"
+					class="form-control" id="inputPhone" th:name="labPhoneNumber"
+					th:field="${lab.labPhoneNumber}">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputUnit">Lab Address</label> <input type="text"
+						class="form-control" id="inputUnit" th:name="labUnit"
+						th:field="${lab.labUnit}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputStreet"></label> <input type="text"
+						class="form-control" id="inputStreet" th:name="labStreet"
+						th:field="${lab.labStreet}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputCity"></label> <input type="text"
+						class="form-control" id="inputCity" th:name="labCity"
+						th:field="${lab.labCity}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputProvince"></label> <input type="text"
+						class="form-control" id="inputProvince" th:name="labProvince"
+						th:field="${lab.labProvince}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputCountry"></label> <input type="text"
+						class="form-control" id="inputCountry" th:name="labCountry"
+						th:field="${lab.labCountry}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputPostalCode"></label> <input type="text"
+						class="form-control" id="inputPostalCode" th:name="labPostalCode"
+						th:field="${lab.labPostalCode}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputLabLicense">Lab License</label> <input type="text"
+						class="form-control" id="inputLabLicense" th:name="labLicenseId"
+						th:field="${lab.labLicenseId}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputTestsAvailable">Tests Available</label> <input
+					type="text" class="form-control" id="inputTestsAvailable"
+					th:name="labTestsAvailable" th:field="${lab.labTestsAvailable}">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputAccountName">Account Details</label> <input
+					type="text" class="form-control" id="inputAccountName"
+					th:name="labAccountName" th:field="${lab.labAccountName}">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="inputAccountNo"></label> <input type="text"
+						class="form-control" id="inputAccountNo"
+						th:name="labAccountNumber" th:field="${lab.labAccountNumber}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputBankNo"></label> <input type="text"
+						class="form-control" id="inputBankNo"
+						th:name="labBankInstitutionNumber"
+						th:field="${lab.labBankInstitutionNumber}">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputTransitNo"></label> <input type="text"
+						class="form-control" id="inputTransitNo"
+						th:name="labTransitNumber" th:field="${lab.labTransitNumber}">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary" style="background-color: #324766; margin: 10px;">Save</button>
+		</form>
+	</section>
+	<footer class="row row-cols-5 py-5 my-5 border-top"
+		style="background-color: #324766; color: white">
+		<div class="col">
+			<a class="navbar-brand" href="#"><img
+				th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+		</div>
+
+		<div class="col">
+			<h5>FOR PATIENTS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>FOR DOCTORS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">MY PROFILE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>MORE</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">HELP</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FAQs</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">ABOUT</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>SOCIAL</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">TWITTER</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FACEBOOK</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">YOUTUBE</a></li>
+			</ul>
+		</div>
+	</footer>
+
+</body>
+</html>

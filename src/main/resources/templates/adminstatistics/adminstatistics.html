@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Platform Statistics</title>
+<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href = "@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<header>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style = "background-color: #324766">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" th:href="@{/admin-statistics}"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link focus" th:href="@{/admin-statistics}">STATISTICS</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/admin-inventory}">INVENTORY</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/admin-order}">Orders</a>
+	        </li>
+	        <li class="nav-item">
+	          <p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+	        </li>
+	        <li class="nav-item">
+	          	<form th:action="@{/logout}" method="post">
+    				<input type="submit" value="LOGOUT" />
+				</form>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</header>
+
+<section style = "margin: 150px">
+
+<h1 style="text-align: center">Platform Statistics</h1>
+
+<div class="container">
+
+  <div class="row" >
+  <div>
+        <h2>Patient information - Total Count : <span th:text="${patientcount}"/></h2>
+
+    </div> 
+    <div>
+        <table class="table">
+            <thead class="thead">
+                <tr>
+                    <th>Email</th>
+                    <th>Patient First Name</th>
+                    <th>Patient Middle Name</th>
+                    <th>Patient Last Name</th>
+                    <th>Date Of Birth</th>
+					<th>Gender</th>
+                    <th>Phone Number</th>
+                    <th>Blood Group</th>
+                    <th>Apartment</th>
+					<th>Street Address</th>
+                    <th>City</th>
+					<th>Province</th>
+                    <th>Country</th>
+                    <th>Postal Code</th>
+                    <th>Medical History</th>
+                    <th>Emergency Contact Name</th>
+                    <th>Emergency Contact Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patient: ${patientStat}">
+                    <td th:text="${patient.patient_email}"/>	
+						<td th:text="${patient.patient_fname} " />	
+						<td th:text="${patient.patient_mname} " />	
+						<td th:text="${patient.patient_lname} "/>	
+						<td th:text="${patient.patient_dob} "/>	
+						<td th:text="${patient.patient_gender} "/>	
+						<td th:text="${patient.patient_phone_no} "/>	
+						<td th:text="${patient.patient_blood_group} "/>	
+						<td th:text="${patient.patient_apartment_no} " />	
+						<td th:text="${patient.patient_street} "/>	
+						<td th:text="${patient.patient_city}"/>	
+						<td th:text="${patient.patient_province}"/>	
+						<td th:text="${patient.patient_country}"/>	
+						<td th:text="${patient.patient_postal_code}"/>	
+						<td th:text="${patient.patient_medical_history}"/>					
+						<td th:text="${patient.patient_emergency_contact_name}"/>	
+						<td th:text="${patient.patient_emergency_contact_phone_no}"/>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+  
+  <div class="row" >
+  <div>
+        <h2>Doctor information - Total Count : <span th:text="${doctorcount}"/</h2>
+    </div> 
+    <div>
+        <table class="table">
+            <thead class="thead">
+                <tr>
+                    <th>Email</th>
+					<th>Doctor First Name</th>
+					<th>Doctor Middle Name</th>
+					<th>Doctor Last Name</th>
+					<th>Date Of Birth</th>
+					<th>Gender</th>
+					<th>Phone</th>
+					<th>Apartment Number</th>
+					<th>Street Address</th>
+					<th>City</th>
+					<th>Province</th>
+					<th>Country</th>
+					<th>Postal Code</th>
+					<th>Qualification</th>
+					<th>Specialisation</th> 
+					<th>License ID</th>	
+					<th>Consultation Fees</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doctor: ${doctorStat}">
+					<td th:text="${doctor.doctor_email}"/>	
+					<td th:text="${doctor.doctor_fname} " />	
+					<td th:text="${doctor.doctor_mname} " />	
+					<td th:text="${doctor.doctor_lname} "/>	
+					<td th:text="${doctor.doctor_dob} "/>	
+					<td th:text="${doctor.doctor_gender} "/>	
+					<td th:text="${doctor.doctor_phone} "/>	
+					<td th:text="${doctor.doctor_apartment} "/>	
+					<td th:text="${doctor.doctor_street_address} " />	
+					<td th:text="${doctor.doctor_city } "/>	
+					<td th:text="${doctor.doctor_province}"/>	
+					<td th:text="${doctor.doctor_country}"/>	
+					<td th:text="${doctor.doctor_postal_code}"/>	
+					<td th:text="${doctor.doctor_qualification}"/>	
+					<td th:text="${doctor.doctor_specialisation}"/>
+					<td th:text="${doctor.doctor_license_id}"/>
+					<td th:text="${doctor.doctor_consultation_fees}"/>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="row" >
+  <div>
+        <h2>Lab information - Total Count : <span th:text="${labcount}"/</h2>
+    </div> 
+    <div>
+        <table class="table">
+            <thead class="thead">
+                <tr>
+                    <th>Email</th>
+                    <th>Lab Name</th>
+                    <th>Date Of Establishment</th>
+                    <th>Owner First Name</th>
+                    <th>Owner Middle Name</th>
+					<th>Owner Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Unit No.</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+					<th>Province</th>
+                    <th>Country</th>
+                    <th>Postal Code</th>
+                    <th>License ID</th>
+                    <th>Available Lab Test</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lab: ${labStat}">     
+                	<td th:text="${lab.lab_email}"/>	
+                    <td th:text="${lab.lab_name} " />	
+					<td th:text="${lab.lab_doe} " />	
+					<td th:text="${lab.lab_owner_fname} "/>	
+					<td th:text="${lab.lab_owner_mname} "/>	
+					<td th:text="${lab.lab_owner_lname} "/>	
+					<td th:text="${lab.lab_phone} "/>	
+                    <td th:text="${lab.lab_unit} "/>	
+					<td th:text="${lab.lab_street_address} " />	
+					<td th:text="${lab.lab_city} "/>	
+					<td th:text="${lab.lab_province}"/>	
+					<td th:text="${lab.lab_country}"/>	
+					<td th:text="${lab.lab_postal_code}"/>	
+                    <td th:text="${lab.lab_license_id}"/>	
+					<td th:text="${lab.lab_tests_available}"/>		
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+  
+</div>
+
+
+
+</section>
+</div>
+</section>
+<footer class="row row-cols-5 py-5 my-5 border-top" style = "background-color: #324766 ; color: white">
+  <div class="col">
+    <a class="navbar-brand" href="#"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+  </div>
+
+  <div class="col">
+    <h5>FOR PATIENTS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>FOR DOCTORS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">MY PROFILE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>MORE</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">HELP</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ABOUT</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>SOCIAL</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">TWITTER</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FACEBOOK</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YOUTUBE</a></li>
+  </div>
+</footer>
+
+</body>
+</html>

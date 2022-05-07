@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>My Profile</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark"
+         style="background-color: #324766">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/doctor-view-appointments}"><img
+                    th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100"/></a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link"
+                                            th:href="@{/doctor-view-appointments}">SCHEDULED APPOINTMENTS</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            th:href="@{/doctor-create-prescriptions}">UPLOAD
+                        PRESCRIPTIONS</a></li>
+                    <li class="nav-item"><a class="nav-link focus"
+                                            th:href="@{/doctor-profile}">MY PROFILE</a></li>
+                    <li class="nav-item">
+                        <p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+                    </li>
+                    <li class="nav-item">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="LOGOUT"/>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="container-fluid"
+         style="margin-top: 150px; margin-bottom: 150px">
+    <div class="alert alert-success" role="alert" th:if="${success}">
+        <p th:text="${success}"/>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+        <p th:text="${error}"/>
+    </div>
+    <form th:object="${doctor}" th:action="@{/doctor-profile}" method="post">
+	    <div class="form-group col-md-4">
+					<label for="doctorProfileAccountBalance">Account Balance</label> <input
+						type="text" class="form-control" id="doctorProfileAccountBalance"
+						th:field="${doctor.doctorAccountBalance}" placeholder="100 CAD"
+						readOnly>
+		</div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="doctorFirstName">Name *</label> <input type="text"
+                                                                   class="form-control" id="doctorFirstName"
+                                                                   th:name="doctorFname"
+                                                                   th:field="${doctor.doctorFname}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorMiddleName"></label> <input type="text"
+                                                              class="form-control" id="doctorMiddleName"
+                                                              th:name="doctorMname"
+                                                              th:field="${doctor.doctorMname}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorLastName"></label> <input type="text"
+                                                            class="form-control" id="doctorLastName"
+                                                            th:name="doctorLname"
+                                                            th:field="${doctor.doctorLname}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="doctorDOB">Date of Birth *</label> <input type="text"
+                                                                  class="form-control" id="doctorDOB"
+                                                                  th:name="doctorDob"
+                                                                  th:field="${doctor.doctorDob}" required>
+        </div>
+        <div class="form-group">
+            <label for="doctorGender">Gender *</label>
+            <select class="form-control form-control" id="doctorGender"
+                    th:name="doctorGender" th:field="${doctor.doctorGender}" required>
+                <option value="" selected>Choose</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                <option value="na">Prefer not to say</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="doctorPhone">Clinic Phone *</label> <input type="text"
+                                                                   class="form-control" id="doctorPhone"
+                                                                   th:name="doctorPhone"
+                                                                   th:field="${doctor.doctorPhone}" required>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="doctorApt">Clinic Address *</label> <input type="text"
+                                                                       class="form-control" id="doctorApt"
+                                                                       th:name="doctorApartment"
+                                                                       th:field="${doctor.doctorApartment}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorStreet"></label> <input type="text"
+                                                          class="form-control" id="doctorStreet"
+                                                          th:name="doctorStreetAddress"
+                                                          th:field="${doctor.doctorStreetAddress}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorCity"></label> <input type="text"
+                                                        class="form-control" id="doctorCity" th:name="doctorCity"
+                                                        th:field="${doctor.doctorCity}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="doctorProvince"></label> <input type="text"
+                                                            class="form-control" id="doctorProvince"
+                                                            th:name="doctorProvince"
+                                                            th:field="${doctor.doctorProvince}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorCountry"></label> <input type="text"
+                                                           class="form-control" id="doctorCountry"
+                                                           th:name="doctorCountry"
+                                                           th:field="${doctor.doctorCountry}" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorPostalCode"></label> <input type="text"
+                                                              class="form-control" id="doctorPostalCode"
+                                                              th:name="doctorPostalCode"
+                                                              th:field="${doctor.doctorPostalCode}" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="doctorQualification">Qualification *</label> <input
+                    type="text" class="form-control" id="doctorQualification" th:name="doctorQualification"
+                    th:field="${doctor.doctorQualification}"
+                    required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorSpecialisation"></label> <input type="text"
+                                                                  class="form-control" id="doctorSpecialisation"
+                                                                  th:name="doctorSpecialisation"
+                                                                  th:field="${doctor.doctorSpecialisation}" required>
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-4">
+            <label for="doctorLicense">License ID *</label> <input type="text"
+                                                                   class="form-control" id="doctorLicense"
+                                                                   th:name="doctorLicenseId"
+                                                                   th:field="${doctor.doctorLicenseId}" required>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="doctorFee">Consultation Fees *</label> <input
+                type="text" class="form-control" id="doctorFee" th:name="doctorConsultationFees"
+                th:field="${doctor.doctorConsultationFees}" required>
+        </div>
+
+
+        <div class="form-group col-md-4">
+            <label for="doctorAccountName">Account Details</label> <input
+                type="text" class="form-control" id="doctorAccountName" th:name="doctorAccountName"
+                th:field="${doctor.doctorAccountName}">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="doctorAccountNo"></label> <input type="text"
+                                                             class="form-control" id="doctorAccountNo"
+                                                             th:name="doctorAccountNumber"
+                                                             th:field="${doctor.doctorAccountNumber}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorBankNo"></label> <input type="text"
+                                                          class="form-control" id="doctorBankNo"
+                                                          th:name="doctorBankNumber"
+                                                          th:field="${doctor.doctorBankNumber} ">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="doctorTransitNo"></label> <input type="text"
+                                                             class="form-control" id="doctorTransitNo"
+                                                             th:name="doctorTransitNumber"
+                                                             th:field="${doctor.doctorTransitNumber}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #324766; margin: 10px;">Save</button>
+    </form>
+</section>
+<footer class="row row-cols-5 py-5 my-5 border-top"
+        style="background-color: #324766; color: white">
+    <div class="col">
+        <a class="navbar-brand" href="#"><img
+                th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100"/></a>
+    </div>
+
+    <div class="col">
+        <h5>FOR PATIENTS</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+        </ul>
+    </div>
+
+    <div class="col">
+        <h5>FOR DOCTORS</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">MY PROFILE</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+        </ul>
+    </div>
+
+    <div class="col">
+        <h5>MORE</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">HELP</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">ABOUT</a></li>
+        </ul>
+    </div>
+
+    <div class="col">
+        <h5>SOCIAL</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">TWITTER</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">FACEBOOK</a></li>
+            <li class="nav-item mb-2"><a href="#"
+                                         class="nav-link p-0 text-muted">YOUTUBE</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>

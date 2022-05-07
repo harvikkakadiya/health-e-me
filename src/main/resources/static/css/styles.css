@@ -1,0 +1,138 @@
+.avatar {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.big-avatar {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.focus{
+	font-weight: bold; 
+	text-decoration: underline;
+}
+
+.product {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+.product button {
+  padding: 10px;
+  color: white;
+  background-color: #324766;
+  text-align: center;
+  width: 80%;
+  font-size: 15px;
+  margin-bottom: 10px;
+  
+}
+
+.product button:hover {
+  opacity: 0.5;
+}
+
+.cartproduct {
+  width: 910px;
+  margin: auto;
+  font-family: "Times New Roman", Times, serif;
+  padding:10px;
+}
+
+.total {
+  width: 910px;
+  margin: auto;
+  font-family: "Times New Roman", Times, serif;
+  padding:10px;
+}
+
+.cartproduct button {
+  padding: 5px;
+  color: white;
+  background-color: #324766;
+  text-align: center;
+  width: 50%;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.addproduct p {
+font-size: 20px;
+}
+
+.cartproduct button:hover {
+  opacity: 0.5;
+}
+
+.payment {
+  width: 400px;
+  margin: auto;
+  font-family: "Times New Roman", Times, serif;
+  padding:10px;
+}
+
+.payment button {
+  padding: 5px;
+  color: white;
+  background-color: #324766;
+  text-align: center;
+  width: 50%;
+  font-size: 15px;
+  margin: 15px;
+}
+
+.addproduct p {
+font-size: 20px; 
+}
+
+.payment button:hover {
+  opacity: 0.5;
+}
+
+
+.addproduct {
+  width: 910px;
+  margin: auto;
+
+  font-family: "Times New Roman", Times, serif;
+  padding:20px;
+}
+
+
+.product button {
+  padding: 10px;
+  color: white;
+  background-color: #324766;
+  text-align: center;
+  width: 80%;
+  font-size: 15px;
+  margin-bottom: 10px; 
+}
+
+.addproduct button {
+  padding: 10px;
+  color: white;
+  background-color: #324766;
+  text-align: center;
+  width: 80%;
+  font-size: 15px;
+  margin-bottom: 10px;
+  
+}
+
+.product button:hover {
+  opacity: 0.5;
+}
+
+
+table, th, td, tr {
+  border: 2px solid black;
+}

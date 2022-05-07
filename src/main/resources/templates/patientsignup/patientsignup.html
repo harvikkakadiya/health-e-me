@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-dark"
+			style="background-color: #324766">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/}"><img
+					th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link focus"
+							th:href="@{/login}">LOGIN / SIGNUP</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<section class="container-fluid"
+		style="margin-top: 150px; margin-bottom: 150px">
+		<div class="alert alert-success" role="alert" th:if="${success}">
+			<p th:text="${success}" />
+		</div>
+		<div class="alert alert-danger" role="alert" th:if="${error}">
+			<p th:text="${error}" />
+		</div>
+		<form th:action="@{/patient-signup}" method="POST">
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientFirstName">First Name *</label> <input
+						type="text" class="form-control" id="patientFirstName"
+						th:name="patientFirstName" th:field="${patient.patientFirstName}" placeholder="John" required>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientMiddleName">Middle Name</label> <input
+						type="text" class="form-control" id="patientMiddleName"
+						th:name="patientMiddleName" th:field="${patient.patientMiddleName}" placeholder="M">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientLastName">Last Name * </label> <input
+						type="text" class="form-control" id="patientLastName"
+						th:name="patientLastName" th:field="${patient.patientLastName}" placeholder="Doe" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="patientDOB">Date of Birth *</label> <input type="text"
+					class="form-control" id="patientDOB" th:name="patientDOB" th:field="${patient.patientDOB}"
+					placeholder="YYYY-MM-DD" required>
+			</div>
+			<div class="form-group">
+				<label for="patientGender">Gender *</label> <input type="text"
+					class="form-control" id="patientGender" th:name="patientGender" th:field="${patient.patientGender}"
+					placeholder="Male/Female/Other" required>
+			</div>
+			<div class="form-group">
+				<label for="patientPhoneNo">Phone *</label> <input type="text"
+					class="form-control" id="patientPhoneNo" th:name="patientPhoneNo" th:field="${patient.patientPhoneNo}"
+					placeholder="1234567890" required>
+			</div>
+			<div class="form-group">
+				<label for="patientEmail">Email *</label> <input type="email"
+					class="form-control" id="patientEmail" th:name="patientEmail" th:field="${patient.patientEmail}"
+					placeholder="abc@gmail.com" required>
+			</div>
+			<div class="form-group">
+				<label for="patientPassword">Password *</label> <input
+					type="password" class="form-control" id="patientPassword"
+					th:name="patientPassword" placeholder="Password" required>
+			</div>
+			<div class="form-group">
+				<label for="patientConfirmPassword">Confirm Password *</label> <input
+					type="password" class="form-control" id="patientConfirmPassword"
+					th:name="patientConfirmPassword" placeholder="Re-enter Password" required>
+			</div>
+			<div class="form-group">
+				<p>Password should have atleast 1 number, 1 uppercase and 1
+					lowercase letter, 1 special character, and should be atleast 8
+					characters long.</p>
+			</div>
+			<div class="form-group">
+				<label for="patientBloodGroup">Blood Group</label> <input
+					type="text" class="form-control" id="patientBloodGroup"
+					th:name="patientBloodGroup" th:field="${patient.patientBloodGroup}" placeholder="O+">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientApartmentNo">Apartment No.</label> <input
+						type="text" class="form-control" id="patientApartmentNo" 
+						th:name="patientApartmentNo" th:field="${patient.patientApartmentNo}" placeholder="0505">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientStreet">Street</label> <input type="text"
+						class="form-control" id="patientStreet" th:name="patientStreet" th:field="${patient.patientStreet}"
+						placeholder="1333 South Park St">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientCity">City</label> <input type="text"
+						class="form-control" id="patientCity" th:name="patientCity" th:field="${patient.patientCity}"
+						placeholder="Halifax">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientProvince">Province</label> <input type="text"
+						class="form-control" id="patientProvince"
+						th:name="patientProvince" th:field="${patient.patientProvince}" placeholder="Nova Scotia">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientCountry">Country</label> <input type="text"
+						class="form-control" id="patientCountry" th:name="patientCountry" th:field="${patient.patientCountry}"
+						placeholder="Canada">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientPostalCode">Postal Code</label> <input
+						type="text" class="form-control" id="patientPostalCode" 
+						th:name="patientPostalCode" th:field="${patient.patientPostalCode}" placeholder="B3J 2K9">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="patientMedicalHistory">Medical History</label> <input
+					type="text" class="form-control" id="patientMedicalHistory"
+					th:name="patientMedicalHistory" th:field="${patient.patientMedicalHistory}" placeholder="Fever, Sore Throat">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientEmergencyContactName">Emergency Contact
+						Name</label> <input type="text" class="form-control"
+						id="patientEmergencyContactName"
+						th:name="patientEmergencyContactName" th:field="${patient.patientEmergencyContactName}" placeholder="Jane Doe">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientEmergencyContactPhoneNo">Emergency
+						Contact Phone No.</label> <input type="text" class="form-control"
+						id="patientEmergencyContactPhoneNo"
+						th:name="patientEmergencyContactPhoneNo" th:field="${patient.patientEmergencyContactPhoneNo}" placeholder="1234567890">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientAccountName">Account Name *</label> <input
+						type="text" class="form-control" id="patientAccountName"
+						th:name="patientAccountName" th:field="${patient.patientAccountName}" placeholder="John Doe" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="patientAccountNo">Account No. *</label> <input
+						type="text" class="form-control" id="patientAccountNo"
+						th:name="patientAccountNo" th:field="${patient.patientAccountNo}" placeholder="1234567" required>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientBankInstitutionNo">Bank Institution No.
+						*</label> <input type="text" class="form-control"
+						id="patientBankInstitutionNo" th:name="patientBankInstitutionNo" th:field="${patient.patientBankInstitutionNo}"
+						 placeholder="011" required>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="patientTransitNo">Transit No. *</label> <input
+						type="text" class="form-control" id="patientTransitNo"
+						th:name="patientTransitNo"  th:field="${patient.patientTransitNo}" placeholder="12345" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<p>Account Number should contain only 7 or 12 digits.
+					Bank Institution Number should contain numbers of 3 digits. Transit
+					No. should contain numbers of 5 digits.</p>
+			</div>
+			<div class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="gridCheck"
+						required> <label class="form-check-label" for="gridCheck">
+						I agree to Terms and Conditions* </label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary"
+				style="background-color: #324766; margin: 10px;">Sign Up</button>
+		</form>
+	</section>
+	<footer class="row row-cols-5 py-5 my-5 border-top"
+		style="background-color: #324766; color: white">
+		<div class="col">
+			<a class="navbar-brand" href="#"><img
+				th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+		</div>
+
+		<div class="col">
+			<h5>FOR PATIENTS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>FOR DOCTORS</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">MY PROFILE</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>MORE</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">HELP</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FAQs</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">ABOUT</a></li>
+			</ul>
+		</div>
+
+		<div class="col">
+			<h5>SOCIAL</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">TWITTER</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">FACEBOOK</a></li>
+				<li class="nav-item mb-2"><a href="#"
+					class="nav-link p-0 text-muted">YOUTUBE</a></li>
+		</div>
+	</footer>
+
+</body>
+</html>

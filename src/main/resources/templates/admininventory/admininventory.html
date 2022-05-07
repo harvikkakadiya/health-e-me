@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventory</title>
+<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href = "@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<style>
+
+</style>
+
+</head>
+<body>
+<header>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style = "background-color: #324766">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" th:href="@{/admin-statistics}"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/admin-statistics}">STATISTICS</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link focus" th:href="@{/admin-inventory}">INVENTORY</a>
+	        </li>
+	        <li class="nav-item">
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/admin-order}">Orders</a>
+	        </li>
+	          <p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+	        </li>
+	        <li class="nav-item">
+	          	<form th:action="@{/logout}" method="post">
+    				<input type="submit" value="LOGOUT" />
+				</form>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</header>
+
+<section style = "margin: 150px">
+
+<h1 style="text-align: center">Medicine Inventory</h1>
+
+<div class="container">
+
+	<div class="row" style="padding: 20px" >
+    	<div class="addproduct" style="background-color: #BCCFDD">
+		  <h1>Add New Medicine</h1>
+		  <form th:action="@{/admin-inventory}"   th:object="${inventory}" method="POST" style="margin: 20px" >
+			<label style="padding: 12px">Name:</label>
+			<input type="text" name="medicine_name" th:field="*{medicine_name}" min="1"><br>
+			<label style="padding: 12px">Brand:</label>
+			<input type="text" name="medicine_brand_name" th:field="*{medicine_brand_name}" min="1"><br>
+			<label style="padding: 12px">Price:</label>
+			<input type="number" name="medicine_price" th:field="*{medicine_price}" min="0" step="any"><br>
+			<label style="padding: 12px">Quantity:</label>
+			<input type="number" name="medicine_quantity" th:field="*{medicine_quantity}" min="1"><br>
+			<button type="submit" class="btn btn-primary">Add New Medicine</button>
+		</form>
+		  <p align="center"></p>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="row"  >
+    
+   <table class="table">
+            <thead class="thead">
+                <tr>
+                    <th>Medicine ID</th>
+                    <th>Medicine Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Available Quantity</th>
+					<th>Update Medicine Details</th>
+					<th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="medicine: ${medicineList}">
+						<td th:text="${medicine.medicine_id}"/>	
+						<td th:text="${medicine.medicine_name} " />	
+						<td th:text="${medicine.medicine_brand_name} " />	
+						<td th:text="${medicine.medicine_price} "/>	
+						<td th:text="${medicine.medicine_quantity} "/>
+						<td><a th:href="@{/update-medDetail/{id}(id=${medicine.medicine_id}) }" type="submit" class="btn btn-primary">Edit</a></td>
+						<td><a th:href="@{/delete-medDetail/{id}(id=${medicine.medicine_id}) }" type="submit" class="btn btn-danger">Delete</a></td>
+				</tr>
+            </tbody>
+        </table>
+   
+  </div>
+</div>
+
+
+
+</section>
+</div>
+</section>
+<footer class="row row-cols-5 py-5 my-5 border-top" style = "background-color: #324766 ; color: white">
+  <div class="col">
+    <a class="navbar-brand" href="#"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+  </div>
+
+  <div class="col">
+    <h5>FOR PATIENTS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>FOR DOCTORS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">MY PROFILE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>MORE</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">HELP</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ABOUT</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>SOCIAL</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">TWITTER</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FACEBOOK</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YOUTUBE</a></li>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventory</title>
+<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href = "@{/css/styles.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<style>
+
+</style>
+
+</head>
+<body>
+<header>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style = "background-color: #324766">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" th:href="@{/admin-statistics}"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/admin-statistics}">STATISTICS</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link focus" th:href="@{/admin-inventory}">INVENTORY</a>
+	        </li>
+	        <li class="nav-item">
+	          <p class="nav-link">[[${#httpServletRequest.remoteUser}]]</p>
+	        </li>
+	        <li class="nav-item">
+	          	<form th:action="@{/logout}" method="post">
+    				<input type="submit" value="LOGOUT" />
+				</form>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</header>
+
+<section style = "margin: 150px">
+
+<h1 style="text-align: center">Edit Medicine Detail</h1>
+
+<div class="container">
+	<div class="row" style="padding: 5px" >
+	<div class="payment" style="background-color: #BCCFDD">
+		<FORM th:action="@{/updateMedDetail}"   th:object="${editdata}" method="POST">
+		<TABLE>
+		<TR>
+		<TD>Medicine name</TD>
+		<TD>
+		<input type="hidden" th:field="*{medicine_id}"/>
+		<input type="text" name="medicine_name" th:field="*{medicine_name}" min="1"><br>
+		</TD>
+		</TR>
+		<TR>
+		<TD>Medicine Brand name</TD>
+		<TD>
+		<input type="text" name="medicine_brand_name" th:field="*{medicine_brand_name}" min="1"><br>
+		</TD>
+		</TR>
+		<TR>
+		<TD>Medicine Price</TD>
+		<TD>
+		  <input type="text" name="medicine_price" th:field="*{medicine_price}" min="1"><br>
+		</TD>
+		</TR>
+		<TR>
+		<TD>Medicine Quantity</TD>
+		<TD>
+		<input type="text" name="medicine_quantity" th:field="*{medicine_quantity}" min="1"><br>
+		</TD>
+		</TR>
+		</TABLE>
+		<button type="submit" class="btn btn-primary">EDIT</button>
+		</FORM>
+	</div>
+	</div>
+</div>
+</section>
+
+
+<footer class="row row-cols-5 py-5 my-5 border-top" style = "background-color: #324766 ; color: white">
+  <div class="col">
+    <a class="navbar-brand" href="#"><img th:src="@{/images/newlogo.jpg}" alt="" width="100" height="100" /></a>
+  </div>
+
+  <div class="col">
+    <h5>FOR PATIENTS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SEARCH FOR DOCTORS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">CONSULT ONLINE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">BOOK A LAB TEST</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>FOR DOCTORS</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">MY PROFILE</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">SCHEDULED APPOINTMENTS</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>MORE</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">HELP</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">DEVELOPERS</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">ABOUT</a></li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <h5>SOCIAL</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">INSTAGRAM</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">TWITTER</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FACEBOOK</a></li>
+      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">YOUTUBE</a></li>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+image: eclipse-temurin:17-jdk
+variables: 
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  GIT_STRATEGY: clone  
+
+before_script: 
+  - echo "Build, Test, Deploy"
+
+stages:
+  - build
+  - test
+  - deploy-dev
+  - deploy-prod
+
+build:
+  stage: build
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Building"
+    - ./gradlew build
+
+test: 
+  stage: test
+  tags:
+    - dalfcs_gitlab_docker_ci
+  script:
+    - echo "Testing"
+    - ./gradlew test
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/TEST-*.xml
+
+deployDev:
+  stage: deploy-dev
+  tags:
+    - dalfcs_gitlab_docker_ci
+  only:
+    - dev
+  script:
+    - apt-get update
+    - apt-get install -y git
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_TESTING --api-key=$HEROKU_API_KEY
+
+deployProd:
+  stage: deploy-prod
+  tags:
+    - dalfcs_gitlab_docker_ci
+  only:
+    - main
+  script:
+    - apt-get update
+    - apt-get install -y git
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+
+after_script: 
+  - echo "This Works!!!"
